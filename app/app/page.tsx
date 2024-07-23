@@ -101,7 +101,7 @@ export default function Component() {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle className="text-center text-lg font-bold">Hu'jjet tapsiriw ushin formani toltirin'</CardTitle>
+        <CardTitle className="text-center text-lg font-bold">Hujjet tapsiriw ushin formani toltirin'</CardTitle>
       </CardHeader>
       <CardContent className="space-y-2 p-3 md:p-6">
         <form onSubmit={handleSubmit(onSubmit)}>

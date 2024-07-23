@@ -45,7 +45,7 @@ export default function RootLayout({
                 download
                 className="text-blue-500 hover:text-blue-700 hover:underline transition duration-300 ease-in-out px-12 text-sm font-medium"
               >
-                Ma'mleketlik litsenziya
+                Mamleketlik litsenziya
               </a>
             </footer>
           </div>
