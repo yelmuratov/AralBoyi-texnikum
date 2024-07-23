@@ -33,7 +33,7 @@ export default function RootLayout({
               <div className="absolute top-4 right-4">
                 <ModeToggle />
               </div>
-              <h1 className="text-lg font-bold text-center mt-24 md:mt-0">ARALBOYI MEDICINA HAM TRANSPORT TEXNIKUMI</h1>
+              <h1 className="text-lg font-bold text-center mt-24 md:mt-12">ARALBOYI MEDICINA HAM TRANSPORT TEXNIKUMI</h1>
               <div className="w-full flex flex-col items-center">
                 {children}
               </div>
