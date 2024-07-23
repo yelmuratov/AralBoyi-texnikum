@@ -1,0 +1,1 @@
+# AralBoyi-texnikum
