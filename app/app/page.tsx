@@ -101,7 +101,7 @@ export default function Component() {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle className="text-center text-lg font-bold">Hujjet tapsiriw ushin formani toltirin'</CardTitle>
+        <CardTitle className="text-center text-lg font-bold">Hujjet tapsiriw ushin formani toltirin</CardTitle>
       </CardHeader>
       <CardContent className="space-y-2 p-3 md:p-6">
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -118,12 +118,12 @@ export default function Component() {
             </div>
           </div>
           <div className="space-y-2 mb-2">
-            <Label htmlFor="middleName">Akesinin' ati</Label>
+            <Label htmlFor="middleName">Akesinin ati</Label>
             <Input id="middleName" placeholder="Otchestva" {...register('middleName')} />
             {errors.middleName && <p className="text-red-500 text-xs mt-1">{errors.middleName.message}</p>}
           </div>
           <div className="space-y-2 mb-2">
-            <Label htmlFor="dateOfBirth">Tuwilg'an sa'nesi</Label>
+            <Label htmlFor="dateOfBirth">Tuwilgan sanesi</Label>
             <Input type="date" id="dateOfBirth" {...register('dateOfBirth')} />
             {errors.dateOfBirth && <p className="text-red-500 text-xs mt-1">{errors.dateOfBirth.message}</p>}
           </div>
@@ -138,7 +138,7 @@ export default function Component() {
             {errors.secondaryPhoneNumber && <p className="text-red-500 text-xs mt-1">{errors.secondaryPhoneNumber.message}</p>}
           </div>
           <div className="space-y-2 mb-2">
-            <Label htmlFor="category">Jo'nelisti tan'lan'</Label>
+            <Label htmlFor="category">Jonelis</Label>
             <Select onValueChange={(value) => setValue('category', parseInt(value))}>
               <SelectTrigger>
                 <SelectValue placeholder="Jo'nelisti tan'lan'" />
