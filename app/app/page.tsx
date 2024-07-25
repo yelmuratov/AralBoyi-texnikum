@@ -156,7 +156,7 @@ export default function Component() {
             {errors.category && <p className="text-red-500 text-xs mt-1">{errors.category.message}</p>}
           </div>
           <div className="space-y-2 mb-2">
-            <Label htmlFor="type">Type</Label>
+            <Label htmlFor="type">Talim turi</Label>
             <Select onValueChange={(value) => setValue('type', value)}>
               <SelectTrigger>
                 <SelectValue placeholder="Talim turin tan'lan'" />
