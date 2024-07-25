@@ -29,6 +29,7 @@ const formSchema = z.object({
   phoneNumber: z.string().nonempty("Telefon nomer kiritiliw kerek"),
   secondaryPhoneNumber: z.string().nonempty("Qosimcha nomer kiritiliwi kerek"),
   category: z.number().nonnegative("Jo'nelis tan'laniwi sha'rt"),
+  type: z.string().nonempty("Type is required"), // Updated field name
   source: z.literal("website")
 });
 
@@ -47,7 +48,7 @@ export default function Component() {
   });
 
   useEffect(() => {
-    axios.get<Category[]>('https://aralboyitexnikum.uz/api/backend/admission/categories/')
+    axios.get<Category[]>('https://api.aralboyitexnikum.uz/admission/categories/')
       .then(response => {
         setCategories(response.data);
       })
@@ -68,14 +69,15 @@ export default function Component() {
   }, [selectedDate, setValue]);
 
   const onSubmit = (data: FormData) => {
-    axios.post('https://aralboyitexnikum.uz/api/backend/admission/applicants/', {
+    axios.post('https://api.aralboyitexnikum.uz/admission/applicants/', {
       first_name: data.firstName,
       last_name: data.lastName,
       middle_name: data.middleName,
       date_of_birth: data.dateOfBirth,
-      phone_number: parseInt(data.phoneNumber, 10),
-      secondary_phone_number: parseInt(data.secondaryPhoneNumber, 10),
+      phone_number: data.phoneNumber, // Ensure phone numbers are sent as strings
+      secondary_phone_number: data.secondaryPhoneNumber, // Ensure phone numbers are sent as strings
       category: data.category,
+      type: data.type, // Updated field name
       source: data.source,
     })
       .then(response => {
@@ -152,6 +154,19 @@ export default function Component() {
               </SelectContent>
             </Select>
             {errors.category && <p className="text-red-500 text-xs mt-1">{errors.category.message}</p>}
+          </div>
+          <div className="space-y-2 mb-2">
+            <Label htmlFor="type">Type</Label>
+            <Select onValueChange={(value) => setValue('type', value)}>
+              <SelectTrigger>
+                <SelectValue placeholder="Talim turin tan'lan'" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Kundizgi">Kundizdi</SelectItem>
+                <SelectItem value="Sirtqi">Sirtqi</SelectItem>
+              </SelectContent>
+            </Select>
+            {errors.type && <p className="text-red-500 text-xs mt-1">{errors.type.message}</p>}
           </div>
           <CardFooter className="flex justify-end mt-8">
             <Button type="submit">Jiberiw</Button>
