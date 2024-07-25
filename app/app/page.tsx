@@ -20,16 +20,19 @@ interface Category {
   code: number;
 }
 
+// Regex for Uzbekistan phone number validation
+const uzbekPhoneNumberRegex = /^\+998\d{9}$/;
+
 // Define the form schema using Zod
 const formSchema = z.object({
   firstName: z.string().nonempty("Talaban ati majburiy"),
   lastName: z.string().nonempty("Familya jaziliwi shart"),
   middleName: z.string().nonempty("Otchestva jaziliwi kerek"),
   dateOfBirth: z.string().nonempty("Tuwilgan sa'ne kiritiliwi sha'rt"),
-  phoneNumber: z.string().nonempty("Telefon nomer kiritiliw kerek"),
-  secondaryPhoneNumber: z.string().nonempty("Qosimcha nomer kiritiliwi kerek"),
+  phoneNumber: z.string().nonempty("Telefon nomer kiritiliw kerek").regex(uzbekPhoneNumberRegex, "Telefon nomeri Uzbekistan nomer boliw kerek"),
+  secondaryPhoneNumber: z.string().nonempty("Qosimcha nomer kiritiliwi kerek").regex(uzbekPhoneNumberRegex, "Qosimcha telefon nomeri Uzbekistan nomer boliw kerek"),
   category: z.number().nonnegative("Jo'nelis tan'laniwi sha'rt"),
-  type: z.string().nonempty("Type is required"), // Updated field name
+  type: z.string().nonempty("Type is required"),
   source: z.literal("website")
 });
 
@@ -43,7 +46,9 @@ export default function Component() {
   const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      source: 'website'
+      source: 'website',
+      phoneNumber: '+9989', // Default template for phone number
+      secondaryPhoneNumber: '+9989' // Default template for secondary phone number
     }
   });
 
@@ -69,15 +74,19 @@ export default function Component() {
   }, [selectedDate, setValue]);
 
   const onSubmit = (data: FormData) => {
+    // Remove the plus sign before sending to the backend
+    const formattedPhoneNumber = data.phoneNumber.replace('+', '');
+    const formattedSecondaryPhoneNumber = data.secondaryPhoneNumber.replace('+', '');
+
     axios.post('https://api.aralboyitexnikum.uz/admission/applicants/', {
       first_name: data.firstName,
       last_name: data.lastName,
       middle_name: data.middleName,
       date_of_birth: data.dateOfBirth,
-      phone_number: data.phoneNumber, // Ensure phone numbers are sent as strings
-      secondary_phone_number: data.secondaryPhoneNumber, // Ensure phone numbers are sent as strings
+      phone_number: formattedPhoneNumber,
+      secondary_phone_number: formattedSecondaryPhoneNumber,
       category: data.category,
-      type: data.type, // Updated field name
+      type: data.type,
       source: data.source,
     })
       .then(response => {
@@ -162,7 +171,7 @@ export default function Component() {
                 <SelectValue placeholder="Talim turin tan'lan'" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Kundizgi">Kundizgi</SelectItem>
+                <SelectItem value="Kunduzgi">Kundizgi</SelectItem>
                 <SelectItem value="Sirtqi">Sirtqi</SelectItem>
               </SelectContent>
             </Select>
