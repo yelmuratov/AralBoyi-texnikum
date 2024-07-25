@@ -162,7 +162,7 @@ export default function Component() {
                 <SelectValue placeholder="Talim turin tan'lan'" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Kundizgi">Kundizdi</SelectItem>
+                <SelectItem value="Kundizgi">Kundizgi</SelectItem>
                 <SelectItem value="Sirtqi">Sirtqi</SelectItem>
               </SelectContent>
             </Select>
